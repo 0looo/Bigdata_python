@@ -1,0 +1,212 @@
+str
+	좌우공백 지우기
+		str.strip()
+	문자바꾸기
+		str.replace('기존문장','대신할문장')
+
+
+작업진도 표시바(tqdm_notebook)
+	import
+		from tqdm import tqdm_notebook
+	사용법
+		ex)  for i in tqdm_notebook(range(숫자)):
+		라면 for 하나가 끝날때마다 진행률이 변경됨
+
+pandas
+	Series
+		pd.Series(list, index=[])           * 주의 *  S대문자, index=[]
+
+		Series.apply(pd.Series.last_valid_index)    : nan이 아닌 index 중 가장작은 값을 추출
+			*원본미반영
+			*Series대신 df를 사용할 경우 col별로 출력
+
+	DataFrame
+
+		저장
+			df.to_csv(파일명, sep = '')
+				* sep : 나누는 기준이 별도지정필요할때
+				        : .tsv파일일 경우 \t 입력
+
+		불러오기
+			pd.read_csv(파일명,sep = '', parse_dates=[col], index_col=0)		
+				* sep : 나누는 기준이 별도지정필요할때
+				       : .tsv파일일 경우 \t 입력
+				* parse_dates=[col] : 지정한 col을 datatype으로 출력
+				* index_col = 0 : 첫col이 Unnamed: 0 일때 삭제해서 출력
+
+		생성
+			pd.DataFrame(list or dict , index=['','',...])
+				* index갯수만큼 적어줘야 함
+				* dict의 경우 keys => col
+	
+		병합
+			concat([df1, df2], ignore_index = Ture, axis = 1, join = **)
+				* list에 DataFrame넣었을 시 concat(list)
+				* df을 list에 넣었을때는 list를 넣음
+				* ignore_index = Ture   => index를 새로 지정(0~)
+				* axis = 0   => 기본값, raw를 추가하는 방식
+ 				  axis = 1   => col을 추가하는 방식
+				* join = ''
+					1)outer : 기본값, 전체 병합
+					2)inner : 동일한 col만
+
+			merge(df1, df2, on=col명, how = **)
+				* on => df의 col이 다를때 left_on, right_on 으로 사용가능
+				* how
+					1)outer 2)inner  3)left  4) right
+		slicing
+			df.loc[row명, col명]
+				*여러개 선택시 : [[row명, row명..],[col명,col명...]]
+				*구간선택시 [ : 가능]
+			df.iloc[row번호, col번호]
+	           			*여러개 선택시 : [[row번호, row번호..],[col번호,col번호...]]
+				*구간선택시 [ : 가능]
+
+			df[조건] : 조건에 성립하는 값만 출력
+				*조건의 출력값이 index의 갯수에 맞게 나와야함
+	
+
+	
+		groupby
+			함수
+				.count() : index별 갯수 출력
+				.mean()
+				.sum()
+
+			.agg(*)     * : 'mean', 'std', sum, min, max
+		
+			.transform(*)
+				: 해당하는 col을 원래 df의 index에 맞춰서 값들을 출력
+			.apply(*) : .agg()와 동일하지만 agg가 오류날경우 .transform과 동일해짐
+				
+	
+			2개 이상 col을 groupby
+				.groupby([col명, col명])         * 2개이상일때 []로 col묶어줌
+				.unstack() :
+
+		index&column 변경
+		
+			index 변경
+				df.reindex(list) : list로 df의 index가 변경
+					* 원본미반영
+					* 기존의 index에 있는 값들은 list순서에 맞게 정렬, 없으면 nan값으로 row생성
+
+				df.set_index(**, inplace = True)  : 해당 col을 index로 변경
+					* inplace = True 제거시 원본미반영
+					** df['col'] 형식으로 기입 :  기존 col이 남아있음
+					** 'col'형식으로 기입 : 기존 col 삭제됨
+
+			column 변경
+				
+
+			
+		type변경
+			df.col.astype(type)
+				type으로 변경가능
+					*datetime으로 변경불가
+			datetime
+				pd.to_datetime(df[col])
+					*응용     1)요일 : dt.dayofweek					
+						2)pd.date_range(시작일자,종료일자) : 사이기간 자동출력(마지막날도 포함)
+
+				
+		값 정렬
+			df.sort_values(col, ascending = Fales)
+				*.sort_values -> 값기준으로 정렬
+
+
+
+
+		null처리
+			null 위치확인(+갯수확인)
+				pd.isnull(df)
+					: null값일 때 True
+					 + 응용 : .sum() 해서 null갯수 출력
+
+			대안값 넣기
+		
+				df.fillna('대신할값')
+					:null을 넣어줌
+					*값 대신 1)ffill : 위의 값 넣기  2)bfill : 아랫값 넣기
+
+				df.interpolate()
+					: 선형근사값 넣어줌
+
+			제거
+				1. df 전체 기준
+					df.dropna(axis = 0 or 1)
+						:null이 포함된 row를 제거  (axis = 1  => col제거)
+
+				2. col 기준
+					df[pd.notnull(df.col)]
+
+plot
+	plot 크기조절
+		plt.figure(figsize = (15,8))
+	축의 데이터 값 범위 조정
+		plt.ylim([0, 40000])  => y축의 데이터 범위 0~40000으로 조정
+
+크롤링
+	selenium
+		selenium설치
+			anacomda prompt에서 설치
+				pip install selenium
+
+		import
+			from selenium import webdriver
+
+		webdrive사용
+			driver 열기
+				driver = webdriver.Chrome(''파일위치'\\chromedriver.exe')
+
+			driver.get(url)
+				url = '원하는 인터넷 주소' 주소창에 입력 및 검색
+
+			html sorce code 
+				html = driver.page_source
+
+	BeatifulSoup
+		import
+			from bs4 import BeatifulSoup as bs
+		parser
+			soup = bs(html, 'html.parser')
+				*html = driver.page_source
+
+			soup.select('경로 ex)div > ul')
+				* id = #  / class = .
+		text만 추출
+			.text
+				*error 발생시 문자열이 맞는지 확인할 것(list일 확률 높음)
+	time
+		import
+			import time
+		time.sleep(숫자)  * 2~3 추천
+			*page를 완전히 못읽었을 때 오류발생을 방지
+
+
+정규표현식(regular expression)
+	import re(원하는 단어 찾기)
+		찾는 단어 출력
+			re.compile(조건식).findall(str)
+				*해당하는 단어들을 list에 출력
+		해당 조건 제외 출력
+			re.compile(조건식).sub(str)			
+				*해당해는 단어 제외하고 str로 출력
+		조건
+			[ㄱ-힣] : 한글
+			[ㄱ-ㅎ] : 자음
+			[ㅏ-ㅣ] : 모음
+
+			ex str에서 '가지'를 찾기 원하면
+				 re.compile('[가][지]').findall(str)
+
+확인해야 하는 사항
+
+pickle : csv처럼 하나의 확장자
+
+melt : col과 row 수정하는 방법 중 하나
+	pd.melt(df,id_vars='col' var_name = '', value_name = '')
+		col값을 기준으로 나머지 col을 하나씩 묶에서 concat하는 것과 동일한 효과
+		* var_name : 다른 col들의 명칭을 넣는 col의 이름 지정
+		* value_name : 대칭되는 값들을 넣는 col의 이름지정
+	
