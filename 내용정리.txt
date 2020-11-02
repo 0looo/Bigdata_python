@@ -3,14 +3,8 @@ str
 		str.strip()
 	문자바꾸기
 		str.replace('기존문장','대신할문장')
-
-
-작업진도 표시바(tqdm_notebook)
-	import
-		from tqdm import tqdm_notebook
-	사용법
-		ex)  for i in tqdm_notebook(range(숫자)):
-		라면 for 하나가 끝날때마다 진행률이 변경됨
+	문자존재여부확인
+		문자열.str.contains('글자')  * 오류날경우 함수앞에 .str추가
 
 pandas
 	Series
@@ -64,7 +58,9 @@ pandas
 
 			df[조건] : 조건에 성립하는 값만 출력
 				*조건의 출력값이 index의 갯수에 맞게 나와야함
-	
+				* and : & / or : | , 조건마다 ()로 묶어야 함.
+			df.isin([])
+				*.isin() 가로안에 list형식으로 넣어야함, 요소의 정확한 값만 True
 
 	
 		groupby
@@ -104,6 +100,10 @@ pandas
 			df.col.astype(type)
 				type으로 변경가능
 					*datetime으로 변경불가
+			
+			pd.to_numeric(df_last['col명'],errors='coerce')
+				int로 변경  + 불가한 값있어도 무시하고 진행
+
 			datetime
 				pd.to_datetime(df[col])
 					*응용     1)요일 : dt.dayofweek					
@@ -140,11 +140,73 @@ pandas
 				2. col 기준
 					df[pd.notnull(df.col)]
 
+			conda prompt
+				설치 
+					pip install missingno
+				import
+					import missingno as msno
+				null값 표시
+					msno.matrix(df)
+				*using heatmap
+					msno.heatmap(df)
+						: 동일값을 갖는 상위값은 자동생략
+
+
+	pivot_table  : 시각적으로 가장 이쁘게 나옴
+		pd.pivot_table(df, index=''(2개이상일때는 []안에),values = '')
+
+
+	melt 
+		pd.melt(id_vars='col' var_name = '', value_name = '')
+			* id_vars : 기준 col / 나머지 col을 var_name col에 넣고 대칭하는 값들을 value_name으로 넣음
+			* var_name : 다른 col들의 명칭을 넣는 col의 이름 지정
+			* value_name : 대칭되는 값들을 넣는 col의 이름지정
+
+
 plot
 	plot 크기조절
 		plt.figure(figsize = (15,8))
 	축의 데이터 값 범위 조정
 		plt.ylim([0, 40000])  => y축의 데이터 범위 0~40000으로 조정
+
+
+	boxplot  : 데이터 분포파악에 효과적
+		.plot(kind = 'box')
+		
+
+
+	seaborn (시각적인 표현은 가장 이쁨)
+		import seaborn as sns
+
+		sns.barplot(data = df , x= 'col명', y = 'col명' )
+			=> x와 y 기준에 해당하는 값들의 평균으로 bar표시
+		
+
+		satterplot(data = df , x = 'col명', y = 'col명', hue= 'col명')
+			*hue : 세부적으로 나누기 원하는 col / 다른색상 및 기준 표시됨.
+
+		sns.boxplot(data = df, x= 'col명', y= 'col명')
+
+		sns.heatmap(df, cmap = '색상', annot = True, fmt='0.f')
+			*annot : 박스안에 숫자표시
+			*fmt : 소수점표시 기준
+	
+		sns.distplot(df.col)
+			: 해당 col의 값들의 분포를 보여줌 (bar 와 line으로 출력)
+
+	folium
+		import folium
+		좌표 지도찾기
+			folium.Map(location = [lat, long], zoom_start=15)
+				* lat = 경도, long = 위도
+				* zoom_start = 확대크기
+				* 정확한 위치는 표시 x
+		해당좌표에 커서표시
+			m =folium.Map(location = [lat, long], zoom_start=15)
+			flium.Marker([lat, long],icon=folium.Icon(icon='star')).add_to(m)
+			m
+
+
 
 크롤링
 	selenium
@@ -159,12 +221,40 @@ plot
 			driver 열기
 				driver = webdriver.Chrome(''파일위치'\\chromedriver.exe')
 
+			창크기 설정
+				driver.set_window_size(가로,세로)
+				* 일부가 화면에 짤려서 실행안되는 상황을 해결
+
 			driver.get(url)
 				url = '원하는 인터넷 주소' 주소창에 입력 및 검색
 
 			html sorce code 
 				html = driver.page_source
 
+		경로 검색
+			id
+				driver.find_element_by_id('id')		
+			class
+				driver.find_element_by_class_name('class명')		
+			tag
+				driver.find_element_by_tag_name('tag명')	
+			글자
+				driver.find_element_by_link_text('글자').click()
+			xpath
+				driver.find_element_by_xpath('xpath주소')
+
+		클릭
+			driver.find_element_by_link_text('대상의 글자').click()
+
+		단어입력
+			import
+				from selenium.webdriver.common.keys import Keys
+			
+			입력방법
+				경로.send_keys('입력단어')
+				예시)				
+					driver.find_element_by_id('원하는 경로 id').send_keys('단어')
+			
 	BeatifulSoup
 		import
 			from bs4 import BeatifulSoup as bs
@@ -173,7 +263,7 @@ plot
 				*html = driver.page_source
 
 			soup.select('경로 ex)div > ul')
-				* id = #  / class = .
+				* id = #  / class = .  / 기타속성 = []
 		text만 추출
 			.text
 				*error 발생시 문자열이 맞는지 확인할 것(list일 확률 높음)
@@ -182,6 +272,13 @@ plot
 			import time
 		time.sleep(숫자)  * 2~3 추천
 			*page를 완전히 못읽었을 때 오류발생을 방지
+
+
+	requests
+		import requests		
+		html = requests.get(url)
+			: url에서 html 가져옴
+			* soup = bs(html.text , 'html.parser') 로 해야함.
 
 
 정규표현식(regular expression)
@@ -200,13 +297,34 @@ plot
 			ex str에서 '가지'를 찾기 원하면
 				 re.compile('[가][지]').findall(str)
 
+os
+	import
+		import os
+	폴더생성(없을때)
+		if not os.path.isdir(folder): 
+		    os.mkdir(folder)
+
+
+
 확인해야 하는 사항
 
 pickle : csv처럼 하나의 확장자
 
-melt : col과 row 수정하는 방법 중 하나
-	pd.melt(df,id_vars='col' var_name = '', value_name = '')
-		col값을 기준으로 나머지 col을 하나씩 묶에서 concat하는 것과 동일한 효과
-		* var_name : 다른 col들의 명칭을 넣는 col의 이름 지정
-		* value_name : 대칭되는 값들을 넣는 col의 이름지정
+
+
+
+작업진도 표시바(tqdm_notebook)
+	import
+		from tqdm import tqdm_notebook
+	사용법
+		ex)  for i in tqdm_notebook(range(숫자)):
+			=> for 하나가 끝날때마다 진행률이 표시됨
+
+
+urllib(인터넷에서 사진다운)
+	import urllib.request
+	import urllib
+
+	selenium_crawl_3 에 맨밑에 있음
+
 	
