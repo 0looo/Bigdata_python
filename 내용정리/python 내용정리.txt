@@ -8,7 +8,6 @@ list
 	요소 index 추출
 		list.index(요소값)
 
-
 반복문
 	for
 		**실수주의**
