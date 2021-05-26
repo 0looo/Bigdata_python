@@ -8,6 +8,11 @@ list
 	요소 index 추출
 		list.index(요소값)
 
+zip
+	zip(list1, list2..)
+		: 출력은 각 list에서 하나씩 뺴서 tuple로 반환
+		: list 갯수만큼 l1, l2... in zip(list1,list2...) 할 경우 각 변수에 들어감.	
+
 반복문
 	for
 		**실수주의**
