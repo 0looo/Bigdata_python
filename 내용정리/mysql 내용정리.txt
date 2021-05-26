@@ -1,0 +1,250 @@
+셀 실행
+	한줄 실행 : ctrl + enter
+	전체 실행 : ctrl + shift + enter
+	* 부분실행시 원하는 부분 드래그 후 ctrl + shift + enter
+
+주석
+	한줄주석
+		#, -- 
+
+	여러줄 주석
+		/*  ..주석내용 작성..   */
+
+database
+	불러오기
+		1. cmd로 원하는 파일들의 폴더로 이동
+		2. mysql -u root -p 실행
+		3. 비번입력
+		4. source database명.sql
+
+	생성
+		create database database명;
+	
+	활성화
+		use database명;	
+	
+	삭제
+		drop database if exists sqldb ;
+			: sqldb란 database존재시 삭제
+
+table
+# 작업할 database를 활성화 하고 이후 실행(활성화 : use database database명)
+	
+	생성
+		create table table명(col명 datetype 제약조건, col명 datetype 제약조건);
+			# datatype은 개념에서 정리
+
+		# 제약조건 : not null, primary key, unique, default, auto_increment...		
+			# 없을 시 생략가능
+			# col중 하나는 primary key를 입력해야 값을 넣을 수 있음
+			# auto_increment : null로 입력시 자동으로 순서값을 넣어줌
+
+	내보내기
+		select * into outfile '설정된 위치/저장할 이름.txt' from usertbl;
+			#설정된 위치 : 현재는 변경해서 C:/Temp인 상태
+	불러오기
+		load data local infile '설정된 위치/파일이름' into table membertbl;
+
+	데이터 선택
+		select * from table **;
+			* : table선택시 전체 col 선택
+				# 원하는 col만 선택시 col. col..로 입력
+
+			** 자리에 사용되는 함수
+				where col 조건
+					# 조건을 2개작성시 and / or 사용
+				where col between 00 and 00  => 구간 설정시
+				where col in(,,) : 값을 여러개 지정할때 (=, or 혼합과 동일)
+					# 한개 값일때도 사용가능(= 대신)
+				where col like ' ' => '' 형태의 자료를 선택가능
+					# % : 여러글자 /  _ : 한글자
+					ex) '김%' 하면 김씨성 인원 출력가능
+					
+				limit 00
+					: 출력하는 데이터 00개로 제한
+			
+				정렬
+					order by col명 (desc)
+						: 오름(내림)차순 정렬
+			
+				group by : python의 gruopby와 동일
+					ex)  buytbl를 userID기준으로 groupby, amount의 합을 출력
+					 =>select userid, sum(amount) from buytbl group by userid;
+						# sum(amount)라고 col명이 나오기 때문에 이를 변경하려면 바로 뒤에 as(생략가능) '원하는col명'
+
+					조건 : having 사용 (where 사용 불가)
+				subquery
+					: ()를 사용해서 sql query안에 sql query대입 가능
+						# () 앞에 any, all 사용가능
+						# 활용 : 1. table 복사
+							ex ) create table table명 (subquery) 
+
+
+데이터(테이블 값)
+
+	table의 값 삽입
+		insert into table명 values(col 형식 및 갯수에 맞게 작성);
+			# (값1_1, 값2_1..),(값1_2, 값2_2),...으로 한줄로 가능
+			# 이미 존재하는 값은 입력시 오류발생
+			# null 값 입력시 => NULL  입력
+
+		외부데이터 삽입
+			insert into 넣을table명 select 가져올col명, col명.. from 가져올table명;
+				# 가져올table이 다른 database일경우
+					: database명.table명 으로 사용
+
+	값 수정
+		# 수정이 불가하게 setting된 경우 error발생
+			# 해제방법 : Edit - Preferences - SQL Editor - "SaFe Up... 표시해제 - Query - Reconnet Server
+
+		update table명 set 수정할col = 변경할 값(혹은 식) where 조건
+			* where가 없으면 col전체가 변경
+
+		형태수정
+			: cast(col명 as 변경할type)
+
+	삭제(데이터를 NULL로 변경)
+		: delete from table명 where 조건
+
+
+함수
+	delimiter : ;을 다른함수로 변경
+		# procedure 사용시 ;을 구분하기 위해 사용됨
+		# 뒤에 주석을 붙이면 error발생 됨
+		ex) delimiter $$ : ;을 $$로 변경
+	select
+		# python에서 print와 유사함
+		사용되는 함수
+			concat(col, 문자..) : col값, 문자 등을 이어서 한칸에 출력, concat()뒤에 as사용해서 col명 변경가능
+
+			concat_ws('구분자', col or 문자, col or 문자...) : ,마다 구분자를 넣어줌
+
+			ifnull(요소1, 요소2) : 요소1이 null이면 요소2를 출력, 요소1이 null이 아니면 요소1을 출력
+
+			insert('문자열1', index, length, '문자열2') : 문자열1의 index 위치에 length만큼의 문자들을 대체해서  문자열2를 삽입
+				* index는 1부터 시작됨
+
+			left('문자열',num) : 문자열 왼쪽에서 num만큼 리턴
+
+			right('문자열',num) : 문자열 오늘쪽에서 num만큼 리턴
+
+			repeat('문자열', 00); : 문자열을 00만큼 반복
+			
+			lpad('문자열1', 00, '문자열2') : 00자리에 문자열1을 왼쪽에 넣고 나머지를 문자열2로 채움
+			rpad('문자열1', 00, '문자열2') : 00자리에 문자열1을 오른쪽에 넣고 나머지를 문자열2로 채움
+				** python : '문자열'.zfill()과 동일
+			
+			ltrim, rtrim : 왼쪽/오른쪽 공백제거
+				** python : lstrip(), rstrip()과 동일 / strip()해서 양쪽제거도 가능
+			replace('문자열1', '문자열2', '문자열3') : 문자열1에서 문자열2를 문자열3으로 변경
+				## python : '문자열1'.replace('문자열2','문자열3') 과 동일
+
+			space(00) : 00만큼 공백(space)를 만듬
+
+			abs() : 절대값으로 변경
+			ceiling() : 올림 / floor() : 내림 / round() : 반올림
+			mod(num1 , num2) : num1 / num2 의 나머지
+			pow(num1,num2) : num1^num2
+			sqrt(00) : 00^(1/2)
+			length() : byte의 크기 출력
+				#영문은 글자당 1byte, 한글은 글자당 3byte
+
+			distinct col명 : 중복값없이 출력
+			count(col명) : 해당하는 갯수 출력
+			max(col명) : 최댓값 			
+			min(col명) : 최솟값
+			avg(col명) : 평균
+		
+			datetype일때 가능 함수
+				**(col) : 해당 정보 추출
+				** : year, month, day, hour, minute, second
+
+	show : 원하는 type의 목록을 출력
+		ex) show databases; / show tables;
+
+	create : 생성함수 (database, table 등..)
+		ex) create database database명
+
+	drop : 삭제
+		# 없을시 error발생하므로 if exists를 같이 사용한다
+		ex) drop database if exists database명
+
+procedure
+	: db 내부의 명령문을 하나의 함수처럼 사용하기 위한 쿼리집합
+
+	생성
+		delimiter $$
+		create procedure procedure명
+		begin
+			declare 변수명 형태; (내재변수)
+
+			set 변수명 = 넣을 값;
+			...
+		end $$
+		delimiter ;
+
+if 	: 조건문
+	사용방법
+		1) 조건 한개만 사용시
+		if(조건, '참일때 추출내용', '거짓일때 추출내용')
+
+		2) 조건을 여러개 사용시
+		if 조건 then
+			참일때 조건 ;
+
+		elseif  조건 then
+			참일때 조건 ;
+		...
+		
+		else
+			모두 거짓일때 조건 ;
+		end if ;
+
+
+	
+case	: 조건문
+	사용방법
+		case
+			when 조건 then
+				참일때 출력;
+			...
+		
+		end case ; 	
+
+기본설정 변경
+	cmd 관리자권한 실행
+	c:programdata / mysql / mysql server 5.7로 이동
+	notepad my.ini 실행
+		*** 변경할 사항 찾기 및 수정
+	mysql을 종료
+	net stop mysql
+	net start mysql
+	mysql 재실행
+
+	*** 글자 수 범위 조절
+		:max_allowed_packet 을 검색 후 뒤에 크기를 조절
+	***기본폴더 위치 변경
+		:Secure file priv 검색 후 위치 조정
+		* 기본위치 : C:\ProgramData/MySQL/MySQL Server 5.7/Uploads
+
+
+### mysql data type 정리
+## 문자형
+char(00) : 고정길이 문자열 타입, 00 : 최대글자수, 00 : 1~255까지 가능
+	* 글자당 크기 = 알파벳 : 1bype , 한글 : 3bype
+	ex) char(10) : 실제 입력되는 글자와 상관없이 10만큼 자리차지
+ 
+varchar(00) : 가변길이 문자열 타입, 나머지는 char와 동일
+	차이 : varchar는 적게적으면 데이터를 적게잡음 / 단, 속도가 char더 빠름
+TEXT : 최대 65535의 택스트를 담을 수 있음
+longtext : 최대 42994967295 (4M) 텍스트를 담을 수 있음
+
+## 숫자형
+int : -2147483648 ~ 2147483647 사이 가능
+float : -3.102823466e+38 ~ 1.175494351e-38 사이 숫자가능
+
+## 날짜형
+date : yyyy-mm-dd('1001-01-01' ~ '9999-12-31')
+time : hh:mm:ss('-838:59:59' ~ '838:59:59')
+datetime : yyyy-mm-dd hh:mm:ss
+year[(2|4)] : 2인 경우 70 ~ 69, 4인 경우 1970 ~ 2069
