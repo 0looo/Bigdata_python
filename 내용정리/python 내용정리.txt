@@ -373,6 +373,8 @@ numpy
 
 	# 함수
 		np.load(*) :  확장자가 .npy인 파일을 불러들임
+		
+		np.array(*) : *을 array로 변환
 
 		np.concatenate((arr1, arr2), ##) : array 합산
 			##
@@ -387,6 +389,12 @@ numpy
 		df[col].cov(df[col1]) : col & col1의 공분산
 
 		df.std(ddof=0)  * ddof=0 을 붙혀야 오차가 발생하지 않음
+		
+		np.random.seed(#)				
+			# : int값을 넣어서 랜덤성을 지정할 수 있음
+		
+		np.random.shuffle(#)
+			: # 을 seed에 맞게(없으면 랜덤) 섞음.
 
 		np.random.choice(df , size = 10, replace = False)
 			: df에서 10개를 랜덤으로 추출
@@ -406,6 +414,12 @@ numpy
 			# : list, array 등의 unique 출력
 			##
 				return_counts = True : unique의 갯수들 같이 출력
+		
+		np.stack((list1,list2))
+			: list1하단에 list2를 붙힘
+		np.column_stack((list1, list2))
+			: 각 list에서 한개씩 뽑아서 list로 만든후 2차원 array로 출력
+		
 
 pandas
 	Series
@@ -629,16 +643,18 @@ plot
 		f, (ax1, ax2) = plt.subplots(1,2, sharey = True , figsize = (00,00))
 			: ax1, ax2로 해서 각각의 설정 가능
 
-
 	plot 크기조절
 		plt.figure(figsize = (15,8))
-
-
 
 
 	축의 데이터 값 범위 조정
 		plt.ylim([0, 40000])  => y축의 데이터 범위 0~40000으로 조정
 	
+	labeling
+		plt.xlabel('') : x축 이름작성
+		plt.ylabel('') : y축 이름작성
+			// seaborn 혼합사용 가능
+
 	scatterplot
 		.plot(kind='scatter',x='경도',y='위도') : 좌표에 점들료 표시
 			# 위치표시(지도) 등에 활용
@@ -651,85 +667,85 @@ plot
 		.plot(kind = 'box')
 		
 
-	seaborn (시각적인 표현은 가장 이쁨)
-		import seaborn as sns
-		전체적 공통점
-		1) ()안에 color = '' 으로 색조정 가능
+seaborn (시각적인 표현은 가장 이쁨)
+	import seaborn as sns
+	전체적 공통점
+	1) ()안에 color = '' 으로 색조정 가능
 
-		sns.countplot(data = df, x= col명)		 
-			: col의 갯수를 bar차트로 표현
+	sns.countplot(data = df, x= col명)		 
+		: col의 갯수를 bar차트로 표현
 
-		sns.jointplot(data = df, x=col , y = col)
-			: 값들의 dot + 좌표밖으로 bar 표시
+	sns.jointplot(data = df, x=col , y = col)
+		: 값들의 dot + 좌표밖으로 bar 표시
 
-		sns.barplot(data = df , x= 'col명', y = 'col명' )
-			=> x와 y 기준에 해당하는 값들의 평균으로 bar표시
-		
-		sns.relplot(data = df, x = 'col', y = 'col',kind = 'line')  : line plot
+	sns.barplot(data = df , x= 'col명', y = 'col명' )
+		=> x와 y 기준에 해당하는 값들의 평균으로 bar표시
 
-		sns.scatterplot(data = df , x = 'col명', y = 'col명', hue= 'col명')
-			*hue : 세부적으로 나누기 원하는 col / 다른색상 및 기준 표시됨.
+	sns.relplot(data = df, x = 'col', y = 'col',kind = 'line')  : line plot
 
-		sns.boxplot(data = df, x= 'col명', y= 'col명')
+	sns.scatterplot(data = df , x = 'col명', y = 'col명', hue= 'col명')
+		*hue : 세부적으로 나누기 원하는 col / 다른색상 및 기준 표시됨.
 
-		sns.violinplot(data = df , x= 'col명', y= 'col명')
-			: box와 비슷, 라인으로 표현
+	sns.boxplot(data = df, x= 'col명', y= 'col명')
 
-		sns.heatmap(df, cmap = '색상', annot = True, fmt='0.f')
-			*annot : 박스안에 숫자표시
-			*fmt : 소수점표시 기준
-	
-		sns.distplot(df.col **)
-			: 해당 col의 값들의 분포를 보여줌 (bar 와 line으로 출력)
-			** bins = 00 => x축의 단위를 조정
-			***활용 : array를 활용 pdf 그릴때 활용
+	sns.violinplot(data = df , x= 'col명', y= 'col명')
+		: box와 비슷, 라인으로 표현
 
-		sns.lmplot(data = df ,x=col명 ,y=col명, scatter_kws = {'color' : 'black'}, line_kws = {'color' : 'black'})
-			: scatter와 선형추정, 분포 표시
-			* scatter_kws : 선 색을 지정
-			* line_kws : 선 주변의 색 지정
+	sns.heatmap(df, cmap = '색상', annot = True, fmt='0.f')
+		*annot : 박스안에 숫자표시
+		*fmt : 소수점표시 기준
 
-		sns.pairplot(data = df)
-			:df의 col들을 2개씩 묶어서 scatter한 그래프 추출
+	sns.distplot(df.col **)
+		: 해당 col의 값들의 분포를 보여줌 (bar 와 line으로 출력)
+		** bins = 00 => x축의 단위를 조정
+		***활용 : array를 활용 pdf 그릴때 활용
 
-	folium
-		import folium
-		좌표 지도찾기
-			folium.Map(location = [lat, long], zoom_start=15, tiles = '**')
-				* lat = 경도, long = 위도
-				* zoom_start = 확대크기
-				** 'Stamen Terrain' : 지도의 입체감
-				   'CartoDB positron' : 지도를 흐릿하게 함
-				   'CartoDB dark_matter' : 지도를 검은색으로 변환	
+	sns.lmplot(data = df ,x=col명 ,y=col명, scatter_kws = {'color' : 'black'}, line_kws = {'color' : 'black'})
+		: scatter와 선형추정, 분포 표시
+		* scatter_kws : 선 색을 지정
+		* line_kws : 선 주변의 색 지정
 
+	sns.pairplot(data = df)
+		:df의 col들을 2개씩 묶어서 scatter한 그래프 추출
 
-		해당좌표에 커서표시
-			m =folium.Map(location = [lat, long], zoom_start=15)
-
-			folium.Marker(***).add_to(m)
-			folium.CircleMarker(***).add_to(m) : marker를 원으로 표시
-			m
-				***에 들어가는 내용:
-					[lat, long] : 위도, 경도
-					tooltip = '' :  커서를 올렸을때 나오는 글
-
-					Marker에서만 사용
-						 icon=folium.Icon(**)
-						**icon='star' : icon모양을 별모양으로 변경
-					 CircleMarker에서만 사용
-						color = ' ' : 원의 지름색
-						fill = True, fill_color = '  ', radius= 숫자, fill_opacity=숫자 : 원 내부 색 체움 / 내부색/내부원의 크기 / 내부원색의 투명도
+folium
+	import folium
+	좌표 지도찾기
+		folium.Map(location = [lat, long], zoom_start=15, tiles = '**')
+			* lat = 경도, long = 위도
+			* zoom_start = 확대크기
+			** 'Stamen Terrain' : 지도의 입체감
+			   'CartoDB positron' : 지도를 흐릿하게 함
+			   'CartoDB dark_matter' : 지도를 검은색으로 변환	
 
 
-					
-		저장
-			m.save('파일명.html')
+	해당좌표에 커서표시
+		m =folium.Map(location = [lat, long], zoom_start=15)
 
-		표현값이 많을때 일정범위 숫자로 표시
-			from folium.plugins import MarkerCluster
-			m = folium.Map([lat,long], zoom_start = 12)  * m : 이미 지정해둔 값으로
-			Marker_cluster = MarkerCluster().add_to(m)
-			**마지막 folium.Marker에 M대신 Marker_cluster로 변경
+		folium.Marker(***).add_to(m)
+		folium.CircleMarker(***).add_to(m) : marker를 원으로 표시
+		m
+			***에 들어가는 내용:
+				[lat, long] : 위도, 경도
+				tooltip = '' :  커서를 올렸을때 나오는 글
+
+				Marker에서만 사용
+					 icon=folium.Icon(**)
+					**icon='star' : icon모양을 별모양으로 변경
+				 CircleMarker에서만 사용
+					color = ' ' : 원의 지름색
+					fill = True, fill_color = '  ', radius= 숫자, fill_opacity=숫자 : 원 내부 색 체움 / 내부색/내부원의 크기 / 내부원색의 투명도
+
+
+
+	저장
+		m.save('파일명.html')
+
+	표현값이 많을때 일정범위 숫자로 표시
+		from folium.plugins import MarkerCluster
+		m = folium.Map([lat,long], zoom_start = 12)  * m : 이미 지정해둔 값으로
+		Marker_cluster = MarkerCluster().add_to(m)
+		**마지막 folium.Marker에 M대신 Marker_cluster로 변경
 
 
 
