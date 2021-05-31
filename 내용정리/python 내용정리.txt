@@ -3,10 +3,26 @@ str
 		str.strip()
 	문자바꾸기
 		str.replace('기존문장','대신할문장')
+	문자입력
+		f'{} {} '... ### 정리필요
+		++ .format()
+	
 
 list
 	요소 index 추출
 		list.index(요소값)
+	'**'.join(list1)
+		: list요소를 하나씩 출력하면서 사이에 **를 넣음.
+		: list to string
+		
+입력값 받기
+	input()
+		: 외부 입력값 받을 수 있음.
+	
+	sys.stdin.readline()
+		: input과 동일하나 속도가 빠름.
+		: 단일행을 받을 때 /n도 같이 출력되니 조심
+		** import sys 필요
 
 zip
 	zip(list1, list2..)
@@ -56,11 +72,7 @@ sample data
 			(train_input, train_target), (test_input, test_target) = keras.datasets.fashion_mnist.load_data()
 			## 변수가 train, test로 알아서 나눠짐
 
-
 ML
-	
-
-
 	train, test data 분류
 		import 
 			from sklearn.model_selection import train_test_split
@@ -265,7 +277,6 @@ MySQL
 			# 'select 이후 MySQL 편집기능 사용가능
 			## col명 변경, where 동시사용시 : table을 두번적음
 				select ascol명 from (select col명 ascol명 from table) table where 조건 
-
 
 scipy
 	import
