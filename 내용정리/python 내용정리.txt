@@ -66,8 +66,6 @@ Try(예외처리)
 		error가 발생하지 않았을 때 실행할 코드
 	finally : 
 		error 유무와 상관없이 try 종료 후 실행할 문장
- 
-
 
 sample data
 	sklean.datasets : 분류모델에 좋은 sample 제공
@@ -75,8 +73,6 @@ sample data
 			from sklearn.datasets import make_blobs 
 			data = make_blobs(n_samples=200, n_features=2, centers=4, cluster_std = 1.8, random_state=111)
 				# clustering sample 생성
-
-
 	keras
 		import
 			from tensorflow import keras
@@ -109,7 +105,6 @@ ML
 			.transform(##)
 				## fit 되어있는 기준으로 정규화 시켜줌		
 			
-
 	LinearRegrssion(선형회귀)
 		import
 			import sklearn.linear_model import LinearRegrssion
@@ -129,7 +124,6 @@ ML
 				.intercept_ : 선형근사의 y축절편
 				.score(x_test, y_test) : R^2 추출
 
-
 	KNeighborsClassifier(KNN, 근접값으로 분류하는 방법)
 		import
 			from sklearn.neighbors import KNeighborsClassifier
@@ -142,7 +136,6 @@ ML
 				.predict(x_test) : x_test의 값들의 예측값 출력
 					# 변수로 받아서 실제값과 비교하는데 사용
 
-
 	LogisticRegression(이진법으로 분류 분석)
 		import
 			from sklearn.linear_model import LogisticRegression
@@ -150,7 +143,6 @@ ML
 			# 사용함수(log 뒤에 사용)
 				.fit(x_train, y_train)
 				.predict(x_test)
-
 
 	DecisionTreeClassifier(의사결정나무)
 		import
@@ -161,7 +153,6 @@ ML
 				.predict(x_test)
 				.feature_importances_
 					: 요소별 중요도 추출
-
 
 	Support Vector Machine(SVC) : 분류모델
 		import
@@ -184,7 +175,6 @@ ML
 				.labels_  : data들의 추측값 출력	
 				.predict(x_test)
 
-
 	RandomForestClassifier(Bagging + decision tree)
 		import
 			from sklearn.ensemble import RandomForestClassifier
@@ -193,9 +183,6 @@ ML
 			# 사용함수(log 뒤에 사용)
 				.fit(x_train, y_train)
 				.predict(x_test)
-
-
-
 		
 	결과값 정확도 확인
 		metrics
@@ -215,7 +202,6 @@ ML
 				metrics.r2_score(y_test, predictions)
 					: R^2 추출
 
-
 		confusion_matrix, classification_report
 			# 사용 : knn /
 			import
@@ -231,7 +217,6 @@ ML
 				print(classification_report(y_test, predictions))
 					: precision, recall, f1-score, support 값 추출
 
-
 	하이퍼파라미터 선택방법
 		GridSearchCV
 			import
@@ -245,15 +230,12 @@ ML
 				grid = GridSearchCV(##)
 					## 순서 : 분석기법, param_grid ...(기본설정값)
 						ex) RandomForestClassifier(), param_grid = params, refit = True , verbose=True, cv = 3 
-
-
 					# 함수
 					grid.fit(x_train, y_train) : 주어진 변수들로 계산
 					# fit 다음으로 사용가능 함수
 					grid.best_parmas_ : 최적의 설정 추출
 					grid.best_score_ : 최고의 적중률
 				
-
 MySQL
 	import
 		import MySQLdb as ms
@@ -306,7 +288,6 @@ scipy
 	sp.std() == np.std()
 
 stats
-
 	import
 		: from scipy import stats
 	
@@ -381,15 +362,12 @@ stats
 
 # Skew : 잔차의 좌우측 처짐(-+)
 
-
-
 		분산분석
 			sm.stats.anova_lm(lm_ , **)
 				: sum_sq, 자유도, F비, p_value 추출
 				* lm_ : smf.ols한 변수 넣음
 				** typ = 1 : 단일변수 분산분석
 				   typ = 2 : 다중변수 분산분석		
-
 
 numpy
 	import
@@ -443,7 +421,6 @@ numpy
 			: list1하단에 list2를 붙힘
 		np.column_stack((list1, list2))
 			: 각 list에서 한개씩 뽑아서 list로 만든후 2차원 array로 출력
-		
 
 pandas
 	Series
@@ -469,9 +446,7 @@ pandas
 			.to_frame()
 				:series를 dataframe으로 변경
 
-
 	DataFrame
-
 		저장
 			df.to_csv(파일명, sep = '')
 				* sep : 나누는 기준이 별도지정필요할때
@@ -543,9 +518,6 @@ pandas
 				*.isin() 가로안에 list형식으로 넣어야함, 요소의 정확한 값만 True
 
 			df.drop_duplicates() : 중복row제거
-
-
-
 	
 		groupby
 			함수
@@ -605,7 +577,6 @@ pandas
 					*응용     1)요일 : dt.dayofweek					
 						2)pd.date_range(시작일자,종료일자) : 사이기간 자동출력(마지막날도 포함)
 
-				
 		값 정렬
 			df.sort_values('col', ascending = Fales,)
 				*col : col의 값을 기준으로 정렬 / by=['col']으로 기입가능
@@ -760,8 +731,6 @@ folium
 					color = ' ' : 원의 지름색
 					fill = True, fill_color = '  ', radius= 숫자, fill_opacity=숫자 : 원 내부 색 체움 / 내부색/내부원의 크기 / 내부원색의 투명도
 
-
-
 	저장
 		m.save('파일명.html')
 
@@ -771,13 +740,11 @@ folium
 		Marker_cluster = MarkerCluster().add_to(m)
 		**마지막 folium.Marker에 M대신 Marker_cluster로 변경
 
-
-
 크롤링
-
-from bs4 import BeautifulSoup as bs
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys   # 단어입력
+	import
+		from bs4 import BeautifulSoup as bs
+		from selenium import webdriver
+		from selenium.webdriver.common.keys import Keys   # 단어입력시 필요
 
 	selenium
 		selenium설치
@@ -840,8 +807,6 @@ from selenium.webdriver.common.keys import Keys   # 단어입력
 					팝업을 끈후에 본래 창으로 switch해줘야 함
 			window 끄기
 				driver.close()		 	
-
-
 
 	BeatifulSoup
 		import
