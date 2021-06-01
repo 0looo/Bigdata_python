@@ -1,3 +1,8 @@
+사칙연산
+	// : 몫
+	% : 나머지
+	** : 제곱
+
 str
 	좌우공백 지우기
 		str.strip()
@@ -6,7 +11,7 @@ str
 	문자입력
 		f'{} {} '... ### 정리필요
 		++ .format()
-	
+
 
 list
 	요소 index 추출
@@ -16,6 +21,10 @@ list
 		: list to string
 		
 입력값 받기
+	공통사항
+		_, *L = map(int, input or sys..)
+			: 첫번째 입력값을 제외하고 나머지 입력값들을 L이라는 list로 넣어서 출력
+
 	input()
 		: 외부 입력값 받을 수 있음.
 	
@@ -23,7 +32,7 @@ list
 		: input과 동일하나 속도가 빠름.
 		: 단일행을 받을 때 /n도 같이 출력되니 조심
 		** import sys 필요
-
+   
 zip
 	zip(list1, list2..)
 		: 출력은 각 list에서 하나씩 뺴서 tuple로 반환
