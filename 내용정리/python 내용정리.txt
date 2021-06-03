@@ -5,7 +5,13 @@
 
 str
 	좌우공백 지우기
-		str.strip()
+		좌우 공백 모두 삭제
+			str.strip()
+		왼쪽에 있는 공백삭제
+			str.lstrip()
+		오른쪽에 있는 공백삭제
+			str.rstrip()
+			
 	문자바꾸기
 		str.replace('기존문장','대신할문장')
 	문자입력
