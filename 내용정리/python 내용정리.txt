@@ -11,8 +11,10 @@ str
 			str.lstrip()
 		오른쪽에 있는 공백삭제
 			str.rstrip()
+			
 	문자바꾸기
 		str.replace('기존문장','대신할문장')
+		
 	문자입력
 		f"...{변수1}...{변수2}..."
 			: abc변수1abc변수2로 출력
@@ -499,11 +501,14 @@ pandas
 			.reset_index(#)
 				: index를 0 ~ 로 변경
 				# drop = True : col추가 방지가능
+				
 			df.rename(index = {'index명' : '바꿀index명'..} , columns = {col명:바꿀col명,...}, inplace = True)
 				: index, column 명 동시변경가능
 				# 원본반영안됨. (inplace하면 가능)
+				
 			df.index = ['index명'....]
 				: list기준으로 index명 변경
+				
 			df.columns = ['col'명...]
 				: list기준으로 columns명 변경
 
@@ -511,6 +516,7 @@ pandas
 			df.loc[row명, col명]
 				*여러개 선택시 : [[row명, row명..],[col명,col명...]]
 				*구간선택시 [ : 가능]
+				
 			df.iloc[row번호, col번호]
 	           			*여러개 선택시 : [[row번호, row번호..],[col번호,col번호...]]
 				*구간선택시 [ : 가능]
@@ -519,6 +525,7 @@ pandas
 				*조건의 출력값이 index의 갯수에 맞게 나와야함
 				* and : & / or : | , 조건마다 ()로 묶어야 함.
 				*앞에 ~붙이면 not
+				
 			df.isin([])
 				*.isin() 가로안에 list형식으로 넣어야함, 요소의 정확한 값만 True
 
@@ -639,22 +646,26 @@ pandas
 
 
 plot
-	plot 동시표시설정
-		f, (ax1, ax2) = plt.subplots(1,2, sharey = True , figsize = (00,00))
-			: ax1, ax2로 해서 각각의 설정 가능
+	Size(크기)
+		plot 동시표시설정
+			f, (ax1, ax2) = plt.subplots(1,2, sharey = True , figsize = (00,00))
+				: ax1, ax2로 해서 각각의 설정 가능
 
-	plot 크기조절
-		plt.figure(figsize = (15,8))
+		plot 크기조절
+			plt.figure(figsize = (15,8))
 
+	axis(축)
+		축의 데이터 값 범위 조정
+			plt.ylim(0, 40000)  => y축의 데이터 범위 0~40000으로 조정
 
-	축의 데이터 값 범위 조정
-		plt.ylim([0, 40000])  => y축의 데이터 범위 0~40000으로 조정
-	
-	labeling
-		plt.xlabel('') : x축 이름작성
-		plt.ylabel('') : y축 이름작성
-			// seaborn 혼합사용 가능
+		labeling(이름 작성)
+			plt.xlabel('') : x축 이름작성
+			plt.ylabel('') : y축 이름작성
+		
+		delete(축 없애기)
+			plt.axis('off')
 
+PYPLOT
 	scatterplot
 		.plot(kind='scatter',x='경도',y='위도') : 좌표에 점들료 표시
 			# 위치표시(지도) 등에 활용
