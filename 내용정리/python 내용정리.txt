@@ -25,11 +25,35 @@ str
 			: String에 {}대신에 넣을 값을 순서에 맞게 format()안에 작성해줌.
 
 list
-	요소 index 추출
+	삽입
+		list.append(##)
+			: ##를 맨 마지막 인덱스에 넣어줌
+			
+		list.insert(#, ##)
+			: #번 자리에 ##값을 넣음
+			
+	delete(제거)
+		del a[index번호]
+			: index번호를 넣어서 삭제가능
+			
+		list.remove(##)
+			: list에서 ##을 제거
+			: ##가 여러개일경우 가장 앞에 있는 1개를 제거함
+			: ##이 없을 경우 error
+			
+		list.pop(##)
+			: ## 을 비워둘경우 맨마지막 요소 출력 및 제거
+			: ##에 index값을 넣어서 추출가능
+	
+	요소 추출
 		list.index(요소값)
+			: index를 사용해서 요소 추출
+	
 	'**'.join(list1)
 		: list요소를 하나씩 출력하면서 사이에 **를 넣음.
 		: list to string
+		
+	
 		
 입력값 받기
 	공통사항
