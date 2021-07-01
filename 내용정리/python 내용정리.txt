@@ -51,7 +51,7 @@ list
 	
 	list to string		
 		'**'.join(list1)
-			: list요소를 하나씩 출력하면서 사이에 **를 넣음.
+			: list요소 사이에 **를 넣으면서 string으로 출력
 	
 	sort
 		sorted(list, ##)
@@ -62,9 +62,7 @@ list
 				: #에 맞춰서 순서정리
 				# = list.find
 					: list에 순서에 맞게 (활용 : 중복단어가 뒤어 나올때 원본과 비교하여 다름으로 찾을 수 있음)
-		
-	
-		
+
 입력값 받기
 	공통사항
 		_, *L = map(int, input or sys..)
@@ -130,7 +128,6 @@ ML
 		x_train, x_test, y_train, y_test =  train_test_split(x,y **)
 			** test_size = 00 : 00비율만큼 test_size 지정
 				# 기본값 = 0.25
-
 			** random_state = 00 : 랜덤추출 고정   # 숫자값 무관
 
 	정규화
@@ -152,8 +149,7 @@ ML
 		
 		lr_model = LinearRegression()
 			: LinearRegression 사용시 변수설정
-			
-	
+		
 			#사용함수(lr_model 뒤에 함수 붙혀서 사용)
 				.fit(x_train, y_train) : 선형근사 (알고리즘 생성)
 					## fit을 한 후 밑의 함수들 사용 가능
@@ -530,7 +526,6 @@ pandas
 			.describe()
 				: 갯수, 평균, 표준편차. 최소값~25%..~최대값
 
-
 		index, column
 			.reset_index(#)
 				: index를 0 ~ 로 변경
@@ -608,7 +603,7 @@ pandas
 
 			column 변경
 			
-			
+
 		type변경
 			df.col.astype(type)
 				type으로 변경가능
@@ -626,7 +621,6 @@ pandas
 			df.sort_values('col', ascending = Fales,)
 				*col : col의 값을 기준으로 정렬 / by=['col']으로 기입가능
 			
-
 		null처리
 			null 위치확인(+갯수확인)
 				pd.isnull(df)
@@ -666,7 +660,6 @@ pandas
 	pivot_table  : 시각적으로 가장 이쁘게 나옴
 		pd.pivot_table(df, index=''(2개이상일때는 []안에),values = '')
 
-
 	melt 
 		pd.melt(id_vars='col' var_name = '', value_name = '')
 			* id_vars : 기준 col / 나머지 col을 var_name col에 넣고 대칭하는 값들을 value_name으로 넣음
@@ -676,7 +669,6 @@ pandas
 	문자 수치화
 		pd.get_dummies(#) : 알고리즘학습시 string을 숫자로 변환하는 함수
 			# list, dataframe가 들어감(type = string인 data..)
-
 
 plot
 	Size(크기)
@@ -709,7 +701,6 @@ PYPLOT
 
 	boxplot  : 데이터 분포파악에 효과적
 		.plot(kind = 'box')
-		
 
 seaborn (시각적인 표현은 가장 이쁨)
 	import seaborn as sns
@@ -868,7 +859,6 @@ folium
 				* <  >안의 글자는 .select('  ')
 				* 속성(<>표시없는)은 [  ]로 (.select 사용 x)
 					** 활용 : class이름 추출때도 ['class']
-
 				* id = #  / class = .  / 기타속성 = []
 				
 		text만 추출
