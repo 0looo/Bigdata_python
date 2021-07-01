@@ -2,6 +2,13 @@
 	// : 몫
 	% : 나머지
 	** : 제곱
+	
+	math
+		import math
+		올림
+			math.ceil(#) : #을 올림처리
+		내림
+			math.floor(#) : #을 내림처리
 
 str
 	좌우공백 지우기
