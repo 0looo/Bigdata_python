@@ -9,6 +9,11 @@
 			math.ceil(#) : #을 올림처리
 		내림
 			math.floor(#) : #을 내림처리
+			
+random
+	import random
+	random int 추출
+		random.randint(startint, endint) : startint ~ endint사이의 정수를 랜덤추출
 
 str
 	좌우공백 지우기
