@@ -35,6 +35,13 @@ str
 			
 		"{}...{}".format(1,2..)
 			: String에 {}대신에 넣을 값을 순서에 맞게 format()안에 작성해줌.
+			
+set
+	삽입
+		set.add(#)
+			: set에 #을 추가
+		set.update(list or set..)
+			: set에 여러값을 추가할때 사용
 
 list
 	삽입
