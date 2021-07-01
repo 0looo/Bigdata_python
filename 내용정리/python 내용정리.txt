@@ -84,7 +84,7 @@ zip
 반복문
 	for
 		**실수주의**
-			num+=1 식의 count를 할때 for문안에 넣으면 계속 초기화됨
+			num+=1 식의 count를 할때 for문안에 넣으면 무한루프에 걸림.
 		
 		작업진도 표시바(tqdm_notebook)
 			import
@@ -92,6 +92,11 @@ zip
 			사용법
 				ex)  for i in tqdm(range(숫자)):
 					=> for 하나가 끝날때마다 진행률이 표시됨
+		
+		enumerate
+			: list의 요소를 가져오면서 index를 자동으로 붙힐때 사용
+			ex) for i, l in enumerate(list, ##) ==> i = index, l= 요소값으로 적용됨
+				## : index시작을 변경가능 (defualt = 0)
 
 Try(예외처리)
 	: error가 발생하는(예상되는) 코드 처리
