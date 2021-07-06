@@ -455,6 +455,10 @@ numpy
 		
 		np.random.seed(#)				
 			# : int값을 넣어서 랜덤성을 지정할 수 있음
+			
+		np.random.randint(#)
+			# : int(= 랜덤 범위지정)
+			  : size = 00 : 00개 추출(list 반환)
 		
 		np.random.shuffle(#)
 			: # 을 seed에 맞게(없으면 랜덤) 섞음.
