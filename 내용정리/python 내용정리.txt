@@ -10,6 +10,10 @@
 		내림
 			math.floor(#) : #을 내림처리
 			
+%
+	%timeit 측정할코드
+		: 걸린시간 출력(속도비교할때 사용)
+			
 random
 	import random
 	random int 추출
