@@ -7,6 +7,17 @@ index(python과 차이점)
     matrix
         # MX[행,렬]
         # slicing방법은 1부터 시작과 - 제외하고 동일함
+        
+Strings
+    chr     : 문자열 형태
+    int     : 숫자
+    num     : 숫자
+    Factor  : 명목형 변수
+    Posixct : 시간 변수
+    Tseries : 시계열 변수
+    
+    chr(vec or maxrix)
+        : 내부 str형태 및 요소값 출력
     
 변수선언
     a < - 2
@@ -55,6 +66,52 @@ matrix, dataframe
             ## col명 설정
                 Col명 = vec1, ...
                     : col명 설정 가능
+
+DATE(시간, 날짜)
+    # 공통사항
+        요일
+            %a : 월,화,수 ...
+            %A : 월요일, 화요일 ...
+            %u : 1~7 사이값 출력, 1:월요일, 2:화요일 ...
+            %w : 0~6 사이값 출력, 0:일요일
+        일
+            %d : 09, 11, 12 ...
+        월
+            %b : 1, 2, ...
+            %B : 1월, 2월...
+        년
+            %y : 12,13,14...
+            %Y : 2012, 2013 ...
+        시간
+            %H : 11, 23, 00...
+            %l(소문자L) : 11, 11, 12..
+        
+        분
+            %M : 23, 45 ...
+        
+        초
+            %S : 06, 11, 15..
+        
+        오전 / 오후
+            %p : AM, PM
+        
+        세기
+            %C : 세기(ex 20세기)    
+
+    Date        
+        as.Date(str, format = "#")
+                # ex) %Y-%m-%d
+            : str을 date형식으로 변경
+                #제한) 년,월,일만 사용가능
+    Posixct
+        as.POSIXct(str, format="#")
+                # ex)%Y-%m-%d %H:%M:%S
+            : str을 POSIXct로 변경
+        
+        format(pos, %)
+            : %에 해당하는 pos의 값을 출력(%은 공통사항 참조)
+    
+    lubridate package(추가정리필요)
 
 크기출력 (length, dim)
     length(vec1)
