@@ -1,0 +1,64 @@
+index(python과 차이점)
+    vector
+        # 1부터 시작함
+        # 00:endIdx 에서 endIdx까지 출력함
+        # [-Idx] => Idx를 제외한 나머지 출력
+    
+    matrix
+        # MX[행,렬]
+        # slicing방법은 1부터 시작과 - 제외하고 동일함
+    
+변수선언
+    a < - 2
+    a = 2
+        * 두가지 모두 가능
+
+주석처리
+    한줄주석
+        # 원하는 내용작성
+        
+    여러줄 주석
+        1. ctrl + shift + c  ## R Studio 기능, 역으로도 가능
+        2. 쓰지않는 변수 활용(꼼수)
+        
+vector(백터)
+    생성
+        c(#)
+            : column형태로 만들어짐(세로로) / console에 출력으론 가로로 나옴
+            # 넣고싶은 요소를 , 기준으로 넣을 수 있음
+            # int1 : int2  => int1부터 +1씩해서 넣어줌 (int2보다 같거나 작은수까지) , 소수도 가능
+            # col명 = 조건 or 요소, col명 = 조건 or 요소  => 백터생성시 column명 설정 가능
+
+        seq(#)
+            : 원하는 범위의 숫자를 넣기 위한 기능
+            # to = end number
+            # from = start number(default = 1)
+            # by = 증가하는 크기(default = 1)
+
+        rep(#)
+            : 원하는 요소를 반복해서 넣을때 사용
+            # 반복할 값, 반복횟수(default = 1)
+            ## 반복할값의 요소만큼 반복횟수를 별도로 백터로 주어서 사용가능
+            
+    추가
+        vec1 = c(vec1, 추가할요소 or vec)
+            : vec1뒤에 요소 or vec를 추가
+
+matrix, dataframe
+    생성
+        matrix(data = , nrow = 열갯수, ncol = col갯수)
+            : data를 nrow or ncol에 맞춰서 matrix 생성
+
+        data.frame(vec1, vec2..)
+            : 각 vec를 col으로 하는 dataframe 생성
+                ## len이 다를 경우 가장 많은 vec에 맞춰서 반복실행  //  큰값과 특정 vce요소갯수가 서로소일경우 error
+            ## col명 설정
+                Col명 = vec1, ...
+                    : col명 설정 가능
+
+크기출력 (length, dim)
+    length(vec1)
+        : vector의 요소갯수 출력
+    
+    dim(matrix)
+        : matrix의 크기 출력
