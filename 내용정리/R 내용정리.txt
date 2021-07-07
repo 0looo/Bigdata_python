@@ -16,9 +16,19 @@ Strings
     Posixct : 시간 변수
     Tseries : 시계열 변수
     
-    chr(vec or maxrix)
-        : 내부 str형태 및 요소값 출력
-    
+    형태 확인
+        chr(vec or maxrix)
+            : 내부 str형태 및 요소값 출력
+
+        is.#(확인할 요소)
+            # : integer, numeric, factor, character
+            : str가 맞는지 여부 
+
+    형태 변환
+        as.#(변환할 요소)
+            # : integer, numeric, factor, character
+            : #에 해당하는 형태로 변환(원본 변경x ==> 별도 변수설정필요)
+
 변수선언
     a < - 2
     a = 2
@@ -31,7 +41,7 @@ Strings
     여러줄 주석
         1. ctrl + shift + c  ## R Studio 기능, 역으로도 가능
         2. 쓰지않는 변수 활용(꼼수)
-        
+
 vector(백터)
     생성
         c(#)
@@ -119,3 +129,9 @@ DATE(시간, 날짜)
     
     dim(matrix)
         : matrix의 크기 출력
+
+요소분포확인
+    summary(vec or max)
+        : str = int or num ==> 최소값, 1사분기, 중앙값, 평균, 3사분기, 최대값 출력
+        : str = factor ==> level 갯수와 요소 출력
+        : str = character ==> chr()와 동일하게 출력(요소 출력)
