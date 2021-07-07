@@ -7,7 +7,7 @@ a ==3
 b = c(2,3,4,5)
 print(b)
 
-# rep(), seq()  // ¹éÅÍ»ı¼º
+# rep(), seq()  // ë°±í„°ìƒì„±
 # seq(from = start, to = end, by = increase)
 x1 = c(1:10)
 print(x1)
@@ -17,13 +17,13 @@ print(x1_1)
 x2 = c(a1 = 0.1:2.3, a2 = .2)
 print(x2)
 
-#rep(¹İº¹ÇÒ °ª, ¹İº¹È½¼ö)
+#rep(ë°˜ë³µí•  ê°’, ë°˜ë³µíšŸìˆ˜)
 x2 = rep(2, 10)
 print(x2)
 
 x2 = rep(3)
 print(x2)
-#rep È°¿ë
+#rep í™œìš©
 x2= c(2,2)
 print(x2)
 
