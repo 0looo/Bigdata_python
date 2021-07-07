@@ -496,6 +496,9 @@ numpy
 		array or list 분할
 			np.split(분할할 요소, 기준)
 				: 기준에 맞게 요소를 나눔(기준이 list도 가능)
+			
+			np.vsplit(분할할 요소, 기준)
+				: 기준을 list로 줌, list안에 숫자만큼 위아래로 잘라냄(잘라내는 만큼 변수설정이 편함)
 
 		np.column_stack((list1, list2))
 			: 각 list에서 한개씩 뽑아서 list로 만든후 2차원 array로 출력
