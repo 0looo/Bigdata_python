@@ -482,8 +482,21 @@ numpy
 			##
 				return_counts = True : unique의 갯수들 같이 출력
 		
-		np.stack((list1,list2))
-			: list1하단에 list2를 붙힘
+		array or list 합치기
+			np.stack((list1,list2))
+				: list1하단에 list2를 붙힘
+
+			np.vstack(list1, list2)
+				: list1하단에 list2를 붙힘
+				## stack과 동일
+
+			np.hstack(list1, list2)
+				: list1 좌측에 list2를 붙힘
+
+		array or list 분할
+			np.split(분할할 요소, 기준)
+				: 기준에 맞게 요소를 나눔(기준이 list도 가능)
+
 		np.column_stack((list1, list2))
 			: 각 list에서 한개씩 뽑아서 list로 만든후 2차원 array로 출력
 
