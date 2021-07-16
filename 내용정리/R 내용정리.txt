@@ -1,3 +1,28 @@
+Package
+    install
+        명령어
+            install.packages("패키지명")
+        
+        패널이용하기
+            Packages - Install - "패키지명"입력
+
+    설치확인
+        명령어
+            installed.packages()
+            
+        패널
+            Pakcages - 검색
+        
+    제거
+        remove.packages('패키지명')
+        
+    로드
+        libary(패키지명)
+            : 패키지 미설치시 error
+        
+        require(패키지명)
+            : 패키지 미설치시 경고
+
 index(python과 차이점)
     vector
         # 1부터 시작함
